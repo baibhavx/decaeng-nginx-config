@@ -1,9 +1,9 @@
 server {
     listen 80;
-    server_name www.decaeng.com;
+    server_name decaeng.com www.decaeng.com;
 
     location / {
-        proxy_pass http://localhost:3000;  # Next.js frontend
+        proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -15,7 +15,7 @@ server {
     }
 
     location /api/ {
-        proxy_pass http://localhost:3001/;  # Express backend should be running on port 3001
+        proxy_pass http://localhost:3001/;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -26,10 +26,16 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    listen 443 ssl;  # SSL config
+    listen 443 ssl;
     ssl_certificate /etc/letsencrypt/live/www.decaeng.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/www.decaeng.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 
+# Redirect non-www to www
+server {
+    listen 80;
+    server_name decaeng.com;
+    return 301 https://www.decaeng.com$request_uri;
+}
