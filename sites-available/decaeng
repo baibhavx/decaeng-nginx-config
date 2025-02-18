@@ -1,6 +1,6 @@
 server {
     server_name decaeng.com www.decaeng.com;
-    return 301 https://www.decaeng.com$request_uri;
+    # return 301 https://www.decaeng.com$request_uri;
 
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/www.decaeng.com/fullchain.pem; # managed by Certbot
