@@ -36,6 +36,5 @@ server {
 # Redirect non-www to www
 server {
     listen 80;
-    server_name decaeng.com;
     return 301 https://www.decaeng.com$request_uri;
 }
