@@ -1,11 +1,10 @@
 server {
     listen 80;
-    server_name decaeng.com;
+    server_name decaeng.com www.decaeng.com;
     return 301 https://www.decaeng.com$request_uri;
 }
 
 server {
-    listen 80;
     listen 443 ssl;
     server_name www.decaeng.com;
 
